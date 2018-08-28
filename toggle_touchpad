@@ -1,0 +1,13 @@
+#!/bin/bash
+
+touchpad_id=`xinput list | grep Elantech | awk '{print $6}' | sed 's/id=//g'`
+touchpad_status=`xinput list-props ${touchpad_id} | grep Device\ Enabled | sed -e 's/.*\:[\t]\+//g'`
+
+# echo $touchpad_id
+# echo $touchpad_status
+
+if [ 1 == ${touchpad_status} ];then
+	xinput disable ${touchpad_id}
+else
+	xinput enable ${touchpad_id}
+fi
